@@ -12,4 +12,6 @@ public interface IRepository<TSource> where TSource : class
     Task<TSource> GetAsync(Expression<Func<TSource, bool>> expression = null, string include = null);
     TSource Update(TSource entity);
     void Delete(Expression<Func<TSource, bool>> expression);
+
+    Task SavaChangesAsync();
 }
