@@ -44,8 +44,11 @@ namespace ZaminEducation.Data.Repositories
         }
 
         public async ValueTask<TSource> GetAsync(Expression<Func<TSource, bool>> expression, string[] includes = null)
-            => await GetAll(expression, includes).FirstOrDefaultAsync();
-
+        { 
+            if (includes is not null)
+                return await GetAll(expression, includes).FirstOrDefaultAsync();
+            return await dbSet.FirstOrDefaultAsync(expression);
+        }
         public TSource Update(TSource entity)
             => dbSet.Update(entity).Entity;
 

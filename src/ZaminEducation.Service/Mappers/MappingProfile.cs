@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
-using System.Net.Mail;
 using ZaminEducation.Domain.Entities.Courses;
 using ZaminEducation.Domain.Entities.Quizzes;
 using ZaminEducation.Domain.Entities.UserCourses;
 using ZaminEducation.Domain.Entities.Users;
-using ZaminEducation.Service.DTOs.Commons;
 using ZaminEducation.Service.DTOs.CoursesDtos;
 using ZaminEducation.Service.DTOs.QuizzesDtos;
 using ZaminEducation.Service.DTOs.UserCoursesDtos;
@@ -35,8 +33,6 @@ namespace ZaminEducation.Service.Mappers
             CreateMap<CourseModule, CourseModuleForCreationDto>().ReverseMap();
             CreateMap<Course, CourseForCreationDto>().ReverseMap();
             CreateMap<CourseCategory, CourseCategoryForCreationDto>().ReverseMap();
-            CreateMap<Attachment, AttachmentForCreationDto>().ReverseMap();
         }
-
     }
 }
