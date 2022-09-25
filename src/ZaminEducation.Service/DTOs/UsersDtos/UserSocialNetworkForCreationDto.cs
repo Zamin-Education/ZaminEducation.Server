@@ -4,7 +4,7 @@ namespace ZaminEducation.Service.DTOs.UsersDtos
 {
     public class UserSocialNetworkForCreationDto
     {
-        public UserForCreationDto User { get; set; }
+        public long UserId { get; set; }
 
         [DataType(DataType.Url)]
         public string TelegramLink { get; set; }

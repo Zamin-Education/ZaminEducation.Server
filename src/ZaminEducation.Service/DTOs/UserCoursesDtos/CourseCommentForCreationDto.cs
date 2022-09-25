@@ -7,11 +7,11 @@ namespace ZaminEducation.Service.DTOs.UserCoursesDtos
     {
         public string Text { get; set; }
 
-        public UserForCreationDto User { get; set; }
+        public long UserId { get; set; }
 
-        public CourseForCreationDto Course { get; set; }
+        public long CourseId { get; set; }
 
-        public CourseCommentForCreationDto Parent { get; set; }
+        public long ParentId { get; set; }
     }
 }
-}
+

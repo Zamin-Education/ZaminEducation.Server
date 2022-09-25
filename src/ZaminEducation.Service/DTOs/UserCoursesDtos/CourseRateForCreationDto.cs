@@ -5,9 +5,9 @@ namespace ZaminEducation.Service.DTOs.UserCoursesDtos
 {
     public class CourseRateForCreationDto
     {
-        public UserForCreationDto User { get; set; }
+        public long UserId { get; set; }
 
-        public CourseForCreationDto Course { get; set; }
+        public long CourseId { get; set; }
 
         public byte Value { get; set; }
     }

@@ -4,8 +4,8 @@ namespace ZaminEducation.Service.DTOs.QuizzesDtos
 {
     public class QuizAssetForCreationDto
     {
-        public QuizContentForCreationDto Content { get; set; }
+        public long ContentId { get; set; }
 
-        public AttachmentForCreationDto File { get; set; }
+        public long FileId { get; set; }
     }
 }

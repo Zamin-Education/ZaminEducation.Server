@@ -2,12 +2,12 @@
 {
     public class QuestionAnswerForCreationDto
     {
-        public QuizContentForCreationDto Content { get; set; }
+        public long ContentId { get; set; }
 
         public bool IsCorrect { get; set; }
 
-        public QuizForCreationDto Quiz { get; set; }
+        public long QuizId { get; set; }
 
-        public QuizContentForCreationDto Question { get; set; }
+        public long Question { get; set; }
     }
 }

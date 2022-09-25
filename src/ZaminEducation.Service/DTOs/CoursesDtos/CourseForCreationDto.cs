@@ -13,13 +13,13 @@ namespace ZaminEducation.Service.DTOs.CoursesDtos
         [MaxLength(100)]
         public string Description { get; set; }
 
-        public UserForCreationDto Author { get; set; }
+        public long AuthorId { get; set; }
 
         public int ViewCount { get; set; }
 
-        public AttachmentForCreationDto Image { get; set; }
+        public long ImageId { get; set; }
 
-        public CourseCategoryForCreationDto Category { get; set; }
+        public long CategoryId { get; set; }
 
         [Required]
         public CourseLevel Level { get; set; }

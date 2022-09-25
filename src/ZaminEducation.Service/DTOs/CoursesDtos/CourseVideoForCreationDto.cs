@@ -14,8 +14,8 @@ namespace ZaminEducation.Service.DTOs.CoursesDtos
 
         public long Length { get; set; }
 
-        public CourseModuleForCreationDto CourseModule { get; set; }
+        public long CourseModuleId { get; set; }
 
-        public CourseForCreationDto Course { get; set; }
+        public long CourseId { get; set; }
     }
 }

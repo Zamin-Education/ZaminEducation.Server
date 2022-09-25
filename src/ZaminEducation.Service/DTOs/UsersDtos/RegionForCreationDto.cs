@@ -7,6 +7,6 @@ namespace ZaminEducation.Service.DTOs.UsersDtos
         [MaxLength(50), Required]
         public string Name { get; set; }
 
-        public RegionForCreationDto Parent { get; set; }
+        public long Parent { get; set; }
     }
 }

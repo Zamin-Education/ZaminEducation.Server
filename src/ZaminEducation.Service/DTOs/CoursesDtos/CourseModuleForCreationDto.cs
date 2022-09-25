@@ -6,6 +6,6 @@ namespace ZaminEducation.Service.DTOs.CoursesDtos
     {
         [Required]
         public string Name { get; set; }
-        public CourseForCreationDto Course { get; set; }
+        public long CourseId { get; set; }
     }
 }

@@ -5,9 +5,9 @@ namespace ZaminEducation.Service.DTOs.QuizzesDtos
 {
     public class QuizResultForCreationDto
     {
-        public UserForCreationDto User { get; set; }
+        public long UserId { get; set; }
 
-        public CourseForCreationDto Course { get; set; }
+        public long CourseId { get; set; }
 
         public double Percentage { get; set; }
     }

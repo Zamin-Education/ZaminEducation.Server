@@ -19,7 +19,7 @@ namespace ZaminEducation.Data.Repositories
             this.dbSet = dbContext.Set<TSource>();
         }
 
-        public async Task<TSource> AddAsync(TSource entity)
+        public async ValueTask<TSource> AddAsync(TSource entity)
         {
             var entry = await dbSet.AddAsync(entity);
 
@@ -43,13 +43,13 @@ namespace ZaminEducation.Data.Repositories
             return query;
         }
 
-        public Task<TSource> GetAsync(Expression<Func<TSource, bool>> expression, string[] includes = null)
-            => GetAll(expression, includes).FirstOrDefaultAsync();
+        public async ValueTask<TSource> GetAsync(Expression<Func<TSource, bool>> expression, string[] includes = null)
+            => await GetAll(expression, includes).FirstOrDefaultAsync();
 
         public TSource Update(TSource entity)
             => dbSet.Update(entity).Entity;
 
-        public async Task SaveChangesAsync()
+        public async ValueTask SaveChangesAsync()
             => await dbContext.SaveChangesAsync();
     }
 }

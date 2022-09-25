@@ -4,9 +4,9 @@ namespace ZaminEducation.Service.DTOs.UsersDtos
 {
     public class AddressForCreationDto
     {
-        public RegionForCreationDto Country { get; set; }
+        public long CountryId { get; set; }
 
-        public RegionForCreationDto Region { get; set; }
+        public long RegionId { get; set; }
 
         [MaxLength(50), Required]
         public string District { get; set; }
