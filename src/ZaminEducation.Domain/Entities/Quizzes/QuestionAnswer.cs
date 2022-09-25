@@ -3,7 +3,7 @@ using ZaminEducation.Domain.Commons;
 
 namespace ZaminEducation.Domain.Entities.Quizzes
 {
-    public class QuestionAnswer : Auditable
+    public sealed class QuestionAnswer : Auditable
     {
         public long ContentId { get; set; }
 

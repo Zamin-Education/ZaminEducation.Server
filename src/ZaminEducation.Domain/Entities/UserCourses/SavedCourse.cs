@@ -5,7 +5,7 @@ using ZaminEducation.Domain.Entities.Users;
 
 namespace ZaminEducation.Domain.Entities.UserCourses
 {
-    public class SavedCourse : Auditable
+    public sealed class SavedCourse : Auditable
     {
         public long CourseId { get; set; }
         public Course Course { get; set; }

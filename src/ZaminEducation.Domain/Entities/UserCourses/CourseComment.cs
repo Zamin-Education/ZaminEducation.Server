@@ -5,7 +5,7 @@ using ZaminEducation.Domain.Entities.Users;
 
 namespace ZaminEducation.Domain.Entities.UserCourses
 {
-    public class CourseComment : Auditable
+    public sealed class CourseComment : Auditable
     {
         public string Text { get; set; }
 

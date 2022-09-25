@@ -3,7 +3,7 @@ using ZaminEducation.Domain.Commons;
 
 namespace ZaminEducation.Domain.Entities.Users
 {
-    public class Address : Auditable
+    public sealed class Address : Auditable
     {
         public long CountryId { get; set; }
         public Region Country { get; set; }

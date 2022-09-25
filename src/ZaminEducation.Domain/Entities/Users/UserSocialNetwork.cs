@@ -4,7 +4,7 @@ using ZaminEducation.Domain.Commons;
 
 namespace ZaminEducation.Domain.Entities.Users
 {
-    public class UserSocialNetwork : Auditable
+    public sealed class UserSocialNetwork : Auditable
     {
         public long UserId { get; set; }
         public User User { get; set; }

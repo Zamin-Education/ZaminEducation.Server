@@ -3,7 +3,7 @@ using ZaminEducation.Domain.Commons;
 
 namespace ZaminEducation.Domain.Entities.Courses
 {
-    public class CourseVideo : Auditable
+    public sealed class CourseVideo : Auditable
     {
         [Required, DataType(DataType.Url)]
         public string Link { get; set; }

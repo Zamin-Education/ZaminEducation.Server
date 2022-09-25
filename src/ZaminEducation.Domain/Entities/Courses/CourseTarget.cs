@@ -3,7 +3,7 @@ using ZaminEducation.Domain.Commons;
 
 namespace ZaminEducation.Domain.Entities.Courses
 {
-    public class CourseTarget : Auditable
+    public sealed class CourseTarget : Auditable
     {
         public string Name { get; set; }
         public long CourseId { get; set; }

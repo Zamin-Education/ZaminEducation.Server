@@ -2,7 +2,7 @@ using ZaminEducation.Domain.Commons;
 
 namespace ZaminEducation.Domain.Entities.Users
 {
-    public class Region : Auditable
+    public sealed class Region : Auditable
     {
         public string Name { get; set; }
 

@@ -4,7 +4,7 @@ using ZaminEducation.Domain.Entities.Users;
 
 namespace ZaminEducation.Domain.Entities.Quizzes
 {
-    public class QuizResult : Auditable
+    public sealed class QuizResult : Auditable
     {
         public long UserId { get; set; }
         public User User { get; set; }
