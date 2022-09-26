@@ -1,5 +1,6 @@
 # ZaminEducation.Server
  Backend of zamineducation.uz
  
- ![Untitled](https://user-images.githubusercontent.com/75162831/191438679-ee9d122c-788a-4a12-8edd-c9ffd1fba3aa.png)
+ ![Untitled (7)](https://user-images.githubusercontent.com/108051785/192198269-daaf54cf-6a05-4e91-bdd8-74a683833fb2.png)
+
 
