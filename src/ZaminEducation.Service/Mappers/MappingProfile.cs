@@ -40,9 +40,6 @@ namespace ZaminEducation.Service.Mappers
             CreateMap<QuizAsset, QuizAssetForCreationDto>().ReverseMap();
             CreateMap<QuestionAnswer, QuestionAnswerForCreationDto>().ReverseMap();
             CreateMap<HashTag, HashTagForCreationDto>().ReverseMap();
-            
-            // another
-            CreateMap<Attachment, AttachmentForCreationDto>().ReverseMap();
         }
 
     }

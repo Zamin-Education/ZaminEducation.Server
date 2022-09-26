@@ -10,5 +10,7 @@ namespace ZaminEducation.Service.DTOs.QuizzesDtos
         public long CourseId { get; set; }
 
         public double Percentage { get; set; }
+
+        public long? AttachmentId { get; set; }
     }
 }

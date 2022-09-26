@@ -1,4 +1,5 @@
 using ZaminEducation.Domain.Commons;
+using ZaminEducation.Domain.Entities.Commons;
 using ZaminEducation.Domain.Entities.Courses;
 using ZaminEducation.Domain.Entities.Users;
 
@@ -13,5 +14,8 @@ namespace ZaminEducation.Domain.Entities.Quizzes
         public Course Course { get; set; }
 
         public double Percentage { get; set; }
+
+        public long? AttachmentId { get; set; }
+        public Attachment Attachment { get; set; }
     }
 }
