@@ -25,16 +25,16 @@ namespace ZaminEducation.Service.Services
 
             return await pagedList.ToListAsync();
 
-            
+
         }
         public async ValueTask<QuizResult> GetAsync(Expression<Func<QuizResult, bool>> expression)
         {
-            var existQuizResult = await repository.GetAsync(expression, new string[] {"User", "Course"});
+            var existQuizResult = await repository.GetAsync(expression, new string[] { "User", "Course" });
 
             if (existQuizResult is null)
                 throw new ZaminEducationException(404, "QuizResult not found.");
 
-            return existQuizResult; 
+            return existQuizResult;
         }
     }
 }
