@@ -26,6 +26,7 @@ namespace ZaminEducation.Service.Services
         {
             User user = await repository.GetAsync(u =>
                 u.Username == username && u.Password == password && u.State != ItemState.Deleted);
+
             if (user is null)
                 throw new ZaminEducationException(400, "Login or Password is incorrect");
 
@@ -44,7 +45,9 @@ namespace ZaminEducation.Service.Services
                 Issuer = configuration["JWT:Issuer"],
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
             };
+
             var token = tokenHandler.CreateToken(tokenDescription);
+
             return tokenHandler.WriteToken(token);
         }
     }

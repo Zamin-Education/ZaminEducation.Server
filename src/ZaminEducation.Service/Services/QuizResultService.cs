@@ -21,20 +21,19 @@ namespace ZaminEducation.Service.Services
         public async ValueTask<IEnumerable<QuizResult>> GetAllAsync
             (Expression<Func<QuizResult, bool>> expression, PaginationParams @params)
         {
-            var pagedList = repository.GetAll(expression, new string[] { "User", "Course" }, false).ToPageList(@params);
+            var pagedList = repository.GetAll(
+                expression, new string[] { "User", "Course" }, false).ToPageList(@params);
 
             return await pagedList.ToListAsync();
-
-            
         }
+
         public async ValueTask<QuizResult> GetAsync(Expression<Func<QuizResult, bool>> expression)
         {
             var existQuizResult = await repository.GetAsync(expression, new string[] {"User", "Course"});
 
-            if (existQuizResult is null)
-                throw new ZaminEducationException(404, "QuizResult not found.");
-
-            return existQuizResult; 
+            return existQuizResult is not null 
+                ? existQuizResult 
+                : throw new ZaminEducationException(404, "QuizResult not found.");
         }
     }
 }

@@ -4,6 +4,7 @@ using ZaminEducation.Domain.Entities.Commons;
 using ZaminEducation.Domain.Enums;
 using ZaminEducation.Service.DTOs.Commons;
 using ZaminEducation.Service.Exceptions;
+using ZaminEducation.Service.Extensions;
 using ZaminEducation.Service.Helpers;
 using ZaminEducation.Service.Interfaces;
 
@@ -27,7 +28,10 @@ public class AttachmentService : IAttachmentService
 
         FileHelper.Remove(file.Path);
 
+        file.Delete();
+
         _repository.Delete(file);
+
         await _repository.SaveChangesAsync();
 
         return true;
@@ -41,8 +45,9 @@ public class AttachmentService : IAttachmentService
         {
             Name = fileName,
             Path = filePath,
-            CreatedBy = HttpContextHelper.UserId
         };
+
+        newAttachement.Create();
 
         newAttachement = await _repository.AddAsync(newAttachement);
         await _repository.SaveChangesAsync();
@@ -54,10 +59,9 @@ public class AttachmentService : IAttachmentService
     {
         var existAttachement = await _repository.GetAsync(expression, null);
 
-        if (existAttachement is null)
-            throw new ZaminEducationException(404, "Attachment not found.");
-
-        return existAttachement;
+        return existAttachement is null 
+            ? throw new ZaminEducationException(404, "Attachment not found.") 
+            : existAttachement;
     }
 
     public async ValueTask<Attachment> UpdateAsync(long id, Stream stream)
@@ -74,9 +78,7 @@ public class AttachmentService : IAttachmentService
         },
         true);
 
-        existAttachment.State = ItemState.Updated;
-        existAttachment.UpdatedBy = HttpContextHelper.UserId;
-        existAttachment.UpdatedAt = DateTime.UtcNow;
+        existAttachment.Update();
 
         existAttachment = _repository.Update(existAttachment);
         await _repository.SaveChangesAsync();
