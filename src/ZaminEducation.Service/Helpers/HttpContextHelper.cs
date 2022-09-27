@@ -13,7 +13,6 @@ public class HttpContextHelper
     {
         string value = HttpContext?.User?.Claims.FirstOrDefault(p => p.Type == "Id")?.Value;
 
-        bool canParse = long.TryParse(value, out long id);
-        return canParse ? id : null;
+        return long.TryParse(value, out long id) ? id : null;
     }
 }

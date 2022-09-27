@@ -19,30 +19,27 @@ namespace ZaminEducation.Service.Services
         {
             var course = await courseRepository.GetAsync(expression, new string[] { "Modules" });
 
-            if (course is null)
-                throw new ZaminEducationException(404, "Course not found");
-
-            return course.Modules;
+            return course is not null 
+                ? course.Modules 
+                : throw new ZaminEducationException(404, "Course not found");
         }
 
         public async Task<IEnumerable<CourseTarget>> GetCourseTargetsAsync(Expression<Func<Course, bool>> expression)
         {
             var course = await courseRepository.GetAsync(expression, new string[] { "Targets" });
 
-            if (course is null)
-                throw new ZaminEducationException(404, "Course not found");
-
-            return course.Targets;
+            return course is not null 
+                ? course.Targets 
+                : throw new ZaminEducationException(404, "Course not found");
         }
 
         public async Task<IEnumerable<CourseVideo>> GetCourseVideosAsync(Expression<Func<Course, bool>> expression)
         {
             var course = await courseRepository.GetAsync(expression, new string[] { "Videos" });
 
-            if (course is null)
-                throw new ZaminEducationException(404, "Course not found");
-
-            return course.Videos;
+            return course is not null 
+                ? course.Videos
+                : throw new ZaminEducationException(404, "Course not found");
         }
     }
 }
