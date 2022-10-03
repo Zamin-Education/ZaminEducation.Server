@@ -46,18 +46,21 @@ namespace ZaminEducation.Service.Services
             return true;
         }
 
-        public async ValueTask<IEnumerable<SavedCourse>> GetAllAsync(PaginationParams @params, Expression<Func<SavedCourse, bool>> expression = null)
+        public async ValueTask<IEnumerable<SavedCourse>> GetAllAsync(
+            PaginationParams @params, 
+            Expression<Func<SavedCourse, bool>> expression = null)
         {
-            var pagedList = savedCourseRepository.GetAll(expression, new string[] { "Course", "User" }, false).ToPagedList(@params);
+            var pagedList =
+                savedCourseRepository.GetAll(expression, new string[] { "Course", "User" }, false).ToPagedList(@params);
+
             return await pagedList.ToListAsync();
         }
 
-        public async ValueTask<IEnumerable<SavedCourse>> GetAllAsync(PaginationParams @params,
-            string search)
-                => await savedCourseRepository.GetAll(includes: new string[] { "Course" },
-                   expression: sc => sc.Id.ToString() == search
-                    || sc.Course.Name == search)?
-                        .ToPagedList(@params).ToListAsync();
+        public async ValueTask<IEnumerable<SavedCourse>> GetAllAsync(PaginationParams @params, string search) =>
+            await savedCourseRepository.GetAll(includes: new string[] { "Course" },
+                expression: sc => sc.Id.ToString() == search
+                || sc.Course.Name == search)?
+                .ToPagedList(@params).ToListAsync();
 
         public async ValueTask<SavedCourse> GetAsync(Expression<Func<SavedCourse, bool>> expression = null)
         {

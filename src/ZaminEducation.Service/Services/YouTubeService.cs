@@ -17,7 +17,9 @@ namespace ZaminEducation.Service.Services
         private readonly IRepository<CourseVideo> youtubeRepository;
         private readonly IRepository<Course> courseRepository;
 
-        public YouTubeService(IRepository<CourseVideo> youtubeRepository, IRepository<Course> courseRepository)
+        public YouTubeService(
+            IRepository<CourseVideo> youtubeRepository,
+            IRepository<Course> courseRepository)
         {
             this.youtubeRepository = youtubeRepository;
             this.courseRepository = courseRepository;
@@ -44,7 +46,6 @@ namespace ZaminEducation.Service.Services
 
             youtubeVideo = await youtubeRepository.AddAsync(youtubeVideo);
             youtubeVideo.Create();
-
             await youtubeRepository.SaveChangesAsync();
 
             return youtubeVideo;
@@ -88,7 +89,6 @@ namespace ZaminEducation.Service.Services
                 throw new ZaminEducationException(404, "Video not found!");
 
             youtubeRepository.Delete(existVideo);
-
             await youtubeRepository.SaveChangesAsync();
 
             return true;
@@ -118,7 +118,6 @@ namespace ZaminEducation.Service.Services
 
             youtubeVideo = youtubeRepository.Update(youtubeVideo);
             youtubeVideo.Update();
-
             await youtubeRepository.SaveChangesAsync();
 
             return youtubeVideo;
@@ -134,15 +133,14 @@ namespace ZaminEducation.Service.Services
             return video;
         }
 
-        public async ValueTask<IEnumerable<CourseVideo>> GetAllAsync(PaginationParams @params,
-            Expression<Func<CourseVideo, bool>> expression = null)
-            => await youtubeRepository.GetAll(expression)?.ToPagedList(@params).ToListAsync();
+        public async ValueTask<IEnumerable<CourseVideo>> GetAllAsync(
+            PaginationParams @params, Expression<Func<CourseVideo, bool>> expression = null) =>
+                await youtubeRepository.GetAll(expression)?.ToPagedList(@params).ToListAsync();
 
-        public async ValueTask<IEnumerable<CourseVideo>> GetAllAsync(PaginationParams @params,
-            string search)
-        => await youtubeRepository.GetAll(
-            cv => cv.Title == search ||
-            cv.Description == search)?
+        public async ValueTask<IEnumerable<CourseVideo>> GetAllAsync(
+            PaginationParams @params, string search) =>
+                await youtubeRepository.GetAll(cv => cv.Title == search 
+                    ||cv.Description == search)? 
                     .ToPagedList(@params).ToListAsync();
 
         public async ValueTask<IEnumerable<string>> GetLinksAsync(string playlistLink)

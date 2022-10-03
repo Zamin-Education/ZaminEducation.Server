@@ -12,13 +12,15 @@ namespace ZaminEducation.Service.Services
 {
     public class CourseCommentService : ICourseCommentService
     {
-        private readonly IRepository<CourseComment> courseCommentRepository;
         private readonly IRepository<Course> courseRepository;
+        private readonly IRepository<CourseComment> courseCommentRepository;
 
-        public CourseCommentService(IRepository<CourseComment> courseCommentRepository, IRepository<Course> courseRepository)
+        public CourseCommentService(
+            IRepository<Course> courseRepository,
+            IRepository<CourseComment> courseCommentRepository)
         {
-            this.courseCommentRepository = courseCommentRepository;
             this.courseRepository = courseRepository;
+            this.courseCommentRepository = courseCommentRepository;
         }
 
         public async ValueTask<CourseComment> AddAsync(long courseId, string message, long? parentId = null)
@@ -76,7 +78,8 @@ namespace ZaminEducation.Service.Services
 
         public async ValueTask<IEnumerable<CourseComment>> GetAllAsync(PaginationParams @params, long courseId)
         {
-            var comments = courseCommentRepository.GetAll(cc => cc.CourseId == courseId && cc.ParentId == null).ToPagedList(@params);
+            var comments = 
+                courseCommentRepository.GetAll(cc => cc.CourseId == courseId && cc.ParentId == null).ToPagedList(@params);
 
             return await comments.ToListAsync();
         }
@@ -125,13 +128,12 @@ namespace ZaminEducation.Service.Services
             return updatedComment;
         }
 
-        public async ValueTask<IEnumerable<CourseComment>> GetAllAsync(PaginationParams @params, string search)
-            => await courseCommentRepository.GetAll(includes: new string[] { "User", "Course" },
-                expression:
-                 cc => cc.Id.ToString() == search ||
-                 cc.User.FirstName == search ||
-                 cc.User.Username == search ||
-                 cc.Course.Name == search)?
-                    .ToPagedList(@params).ToListAsync();
+        public async ValueTask<IEnumerable<CourseComment>> GetAllAsync(PaginationParams @params, string search) =>
+            await courseCommentRepository.GetAll(includes: new string[] { "User", "Course" },
+                expression: cc => cc.Id.ToString() == search
+                || cc.User.FirstName == search
+                || cc.User.Username == search
+                || cc.Course.Name == search)
+                ?.ToPagedList(@params).ToListAsync();
     }
 }

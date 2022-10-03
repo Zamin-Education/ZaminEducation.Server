@@ -50,12 +50,15 @@ namespace ZaminEducation.Service.Services
 
             var certifcate = await GenerateAsync(user.FirstName + " " + user.LastName,
                 course.Name, certificateForCreation.Result.PassedPoint, certificateForCreation.Result.Percentage);
+
             var attachment = await attachmentService.CreateAsync(certifcate.fileName, certifcate.filePath);
 
             return attachment;
         }
 
-        public async ValueTask<IEnumerable<Certificate>> GetAllAsync(PaginationParams @params, Expression<Func<Certificate, bool>> expression = null)
+        public async ValueTask<IEnumerable<Certificate>> GetAllAsync(
+            PaginationParams @params,
+            Expression<Func<Certificate, bool>> expression = null)
         {
             var certificates = certificateRepository.GetAll(expression, new string[] { "Attachment" });
 

@@ -108,11 +108,9 @@ namespace ZaminEducation.Service.Services.Courses
                 throw new ZaminEducationException(404, "Course not found");
 
             course = mapper.Map(courseForCreationDto, course);
-
             course.Update();
 
             course = courseRepository.Update(entity: course);
-
             await courseRepository.SaveChangesAsync();
 
             return course;
@@ -148,12 +146,10 @@ namespace ZaminEducation.Service.Services.Courses
             return course.Videos;
         }
 
-        public async ValueTask<IEnumerable<Course>> GetAllAsync(PaginationParams @params,
-           string search)
-               => await courseRepository.GetAll(
-                   c => c.Id.ToString() == search ||
-                   c.Name == search)?
-                       .ToPagedList(@params).ToListAsync();
+        public async ValueTask<IEnumerable<Course>> GetAllAsync(
+            PaginationParams @params, string search) =>
+                await courseRepository.GetAll(c => c.Id.ToString() == search || c.Name == search)?
+                    .ToPagedList(@params).ToListAsync();
 
         private double CalculateRates(IEnumerable<CourseRate> rates)
             => (double)rates.Sum(r => r.Value) / (double)rates.Count();

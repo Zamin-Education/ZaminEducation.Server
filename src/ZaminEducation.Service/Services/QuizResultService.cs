@@ -17,15 +17,15 @@ namespace ZaminEducation.Service.Services;
 
 public class QuizResultService : IQuizResultService
 {
-    private readonly IRepository<Quiz> _quizRepository;
     private readonly IRepository<QuestionAnswer> _questionAnswerRepository;
     private readonly IRepository<QuizResult> _quizResultRepository;
+    private readonly IRepository<Quiz> _quizRepository;
     private readonly IConfiguration _configuration;
 
     private readonly ICertificateService _certificateService;
-    private readonly IMapper _mapper;
     private QuestionAnswer questionAnswer;
     private int countOfCorrectAnswers = 0;
+    private readonly IMapper _mapper;
     private long courseId;
 
     public QuizResultService(IRepository<Quiz> quizRepository,
@@ -34,20 +34,20 @@ public class QuizResultService : IQuizResultService
         IRepository<QuizResult> quizResultRepository,
         ICertificateService certificateService)
     {
-        _mapper = mapper;
-        _quizRepository = quizRepository;
         _questionAnswerRepository = questionAnswerRepository;
         _quizResultRepository = quizResultRepository;
         _certificateService = certificateService;
+        _quizRepository = quizRepository;
         _configuration = configuration;
+        _mapper = mapper;
     }
 
-    public async ValueTask<IEnumerable<QuizResult>> GetAllAsync
-        (Expression<Func<QuizResult, bool>> expression, PaginationParams @params)
+    public async ValueTask<IEnumerable<QuizResult>> GetAllAsync(
+        Expression<Func<QuizResult, bool>> expression,
+        PaginationParams @params)
     {
-        var pagedList = _quizResultRepository.GetAll(
-            expression, new string[] { "User", "Course" }, false)
-                        .ToPagedList(@params);
+        var pagedList =
+            _quizResultRepository.GetAll(expression, new string[] { "User", "Course" }, false).ToPagedList(@params);
 
         return await pagedList.ToListAsync();
     }
@@ -80,7 +80,6 @@ public class QuizResultService : IQuizResultService
                     PassedPoint = $"{countOfCorrectAnswers}/{dto.Count()}",
                     Percentage = userResult
                 }
-
             });
 
         // add result to database
@@ -93,7 +92,6 @@ public class QuizResultService : IQuizResultService
 
         await _quizResultRepository.AddAsync(_mapper.Map<QuizResult>(quizResult));
         await _quizResultRepository.SaveChangesAsync();
-
 
         return new()
         {
@@ -125,12 +123,12 @@ public class QuizResultService : IQuizResultService
         {
             bool isCorrect = false;
 
-            questionAnswer = await _questionAnswerRepository.GetAsync(a =>
-                                                             a.Id == userSelectionDto.AnswerId);
+            questionAnswer = 
+                await _questionAnswerRepository.GetAsync(a => a.Id == userSelectionDto.AnswerId);
 
             if (questionAnswer is not null
                 && questionAnswer.QuizId == userSelectionDto.QuizId
-                && questionAnswer.IsCorrect is true)
+                && questionAnswer.IsCorrect)
             {
                 countOfCorrectAnswers++;
                 isCorrect = true;

@@ -11,33 +11,36 @@ namespace ZaminEducation.Service.Services
 {
     public class QuizService : IQuizService
     {
-        private readonly IRepository<Quiz> quizRepository;
         private readonly IRepository<QuizContent> quizContentRepository;
-        private readonly IRepository<QuizAsset> quizAssetRepository;
         private readonly IRepository<QuestionAnswer> answerRepository;
-        private readonly IMapper mapper;
-        private readonly ICourseService courseService;
+        private readonly IRepository<QuizAsset> quizAssetRepository;
         private readonly IAttachmentService attachmentService;
+        private readonly IRepository<Quiz> quizRepository;
+        private readonly ICourseService courseService;
+        private readonly IMapper mapper;
 
-        public QuizService(IRepository<Quiz> quizRepository,
+        public QuizService(
             IRepository<QuizContent> quizContentRepository,
-            IRepository<QuizAsset> quizAssetRepository,
             IRepository<QuestionAnswer> answerRepository,
-            ICourseService courseService,
+            IRepository<QuizAsset> quizAssetRepository,
             IAttachmentService attachmentService,
+            IRepository<Quiz> quizRepository,
+            ICourseService courseService,
             IMapper mapper)
         {
-            this.quizRepository = quizRepository;
             this.quizContentRepository = quizContentRepository;
             this.quizAssetRepository = quizAssetRepository;
-            this.answerRepository = answerRepository;
-            this.mapper = mapper;
-            this.courseService = courseService;
             this.attachmentService = attachmentService;
+            this.answerRepository = answerRepository;
+            this.quizRepository = quizRepository;
+            this.courseService = courseService;
+            this.mapper = mapper;
         }
 
-        public async ValueTask<Quiz> CreateAsync(long courseId,
-            QuizForCreationDto quizDto, QuizContentForCreationDto questionDto)
+        public async ValueTask<Quiz> CreateAsync(
+            long courseId,
+            QuizForCreationDto quizDto,
+            QuizContentForCreationDto questionDto)
         {
             var course = await courseService.GetAsync(c => c.Id == courseId);
 
@@ -60,8 +63,7 @@ namespace ZaminEducation.Service.Services
             return quiz;
         }
 
-        public async ValueTask<QuestionAnswer> CreateAnswerAsync(
-            QuestionAnswerForCreationDto dto)
+        public async ValueTask<QuestionAnswer> CreateAnswerAsync(QuestionAnswerForCreationDto dto)
         {
             var content = await quizContentRepository.GetAsync(c => c.Id == dto.ContentId);
             var quiz = await quizRepository.GetAsync(q => q.Id == dto.QuizId);
@@ -79,8 +81,7 @@ namespace ZaminEducation.Service.Services
             return answer;
         }
 
-        public async ValueTask<QuizAsset> CreateAssetsAsync(
-            QuizAssetForCreationDto dto)
+        public async ValueTask<QuizAsset> CreateAssetsAsync(QuizAssetForCreationDto dto)
         {
             var content = await quizContentRepository.GetAsync(c => c.Id == dto.ContentId);
             var attachent = await attachmentService.GetAsync(a => a.Id == dto.FileId);
