@@ -17,7 +17,7 @@ namespace ZaminEducation.Service.Extensions
 
             HttpContextHelper.ResponseHeaders.Add("X-Pagination", json);
 
-            return @params.PageSize > 0 && @params.PageIndex >= 0
+            return @params.PageSize > 0 && @params.PageIndex > 0
                 ? source.Skip((@params.PageIndex - 1) * @params.PageSize).Take(@params.PageSize)
                 : source;
         }
