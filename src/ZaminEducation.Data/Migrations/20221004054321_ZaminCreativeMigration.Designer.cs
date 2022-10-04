@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZaminEducation.Data.DbContexts;
 
@@ -11,9 +12,10 @@ using ZaminEducation.Data.DbContexts;
 namespace ZaminEducation.Data.Migrations
 {
     [DbContext(typeof(ZaminEducationDbContext))]
-    partial class ZaminEducationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221004054321_ZaminCreativeMigration")]
+    partial class ZaminCreativeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -313,6 +315,40 @@ namespace ZaminEducation.Data.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("HashTags");
+                });
+
+            modelBuilder.Entity("ZaminEducation.Domain.Entities.HomePage.HomePagesInfo", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HomePagesInfos");
                 });
 
             modelBuilder.Entity("ZaminEducation.Domain.Entities.Quizzes.QuestionAnswer", b =>
@@ -1348,7 +1384,7 @@ namespace ZaminEducation.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ZaminEducation.Domain.Entities.Users.ApplicantUser", "User")
+                    b.HasOne("ZaminEducation.Domain.Entities.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

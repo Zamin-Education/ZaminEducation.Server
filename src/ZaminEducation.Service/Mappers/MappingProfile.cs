@@ -2,12 +2,14 @@
 using ZaminEducation.Domain.Entities.Commons;
 using ZaminEducation.Domain.Entities.Courses;
 using ZaminEducation.Domain.Entities.Quizzes;
+using ZaminEducation.Domain.Entities.user;
 using ZaminEducation.Domain.Entities.UserCourses;
 using ZaminEducation.Domain.Entities.Users;
 using ZaminEducation.Service.DTOs.Commons;
 using ZaminEducation.Service.DTOs.Courses;
 using ZaminEducation.Service.DTOs.Quizzes;
 using ZaminEducation.Service.DTOs.UserCourses;
+
 using ZaminEducation.Service.DTOs.Users;
 using ZaminEducation.Service.ViewModels;
 
@@ -22,6 +24,8 @@ namespace ZaminEducation.Service.Mappers
             CreateMap<User, UserForCreationDto>().ReverseMap();
             CreateMap<Region, RegionForCreationDto>().ReverseMap();
             CreateMap<Address, AddressForCreationDto>().ReverseMap();
+            CreateMap<ApplicantUser, ApplicantUserForCreationDto>().ReverseMap();
+            CreateMap<Direction, DirectionForCreationDto>().ReverseMap();
 
             // course
             CreateMap<CourseVideo, CourseVideoForCreationDto>().ReverseMap();

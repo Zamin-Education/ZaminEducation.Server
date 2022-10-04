@@ -28,6 +28,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\certificates\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 	<PropertyGroup>

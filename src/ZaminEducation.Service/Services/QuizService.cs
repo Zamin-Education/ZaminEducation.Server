@@ -1,10 +1,7 @@
-﻿using AngleSharp.Common;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Linq.Expressions;
 using ZaminEducation.Data.IRepositories;
-using ZaminEducation.Data.Repositories;
 using ZaminEducation.Domain.Entities.Quizzes;
 using ZaminEducation.Service.DTOs.Quizzes;
 using ZaminEducation.Service.Exceptions;
@@ -102,8 +99,8 @@ namespace ZaminEducation.Service.Services
             return asset;
         }
 
-        public async ValueTask<IEnumerable<Quiz>> GetAllAsync(
-            Expression<Func<Quiz, bool>> expression, int count)
+        public async ValueTask<IEnumerable<Quiz>> GetAllAsync(int count,
+            Expression<Func<Quiz, bool>> expression = null)
         {
             var quizzes = quizRepository.GetAll(expression).ToList();
 

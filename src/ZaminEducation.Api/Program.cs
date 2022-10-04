@@ -77,6 +77,7 @@ if (app.Environment.IsDevelopment())
 
 // Set helpers
 EnvironmentHelper.WebRootPath = app.Services.GetService<IWebHostEnvironment>()?.WebRootPath;
+EnvironmentHelper.HomePagesInfoConnectinString = builder.Configuration.GetValue<string>("HomePagesSettingsPath");
 
 if (app.Services.GetService<IHttpContextAccessor>() != null)
     HttpContextHelper.Accessor = app.Services.GetRequiredService<IHttpContextAccessor>();

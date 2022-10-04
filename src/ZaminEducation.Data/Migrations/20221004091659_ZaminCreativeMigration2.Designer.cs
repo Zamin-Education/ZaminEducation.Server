@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZaminEducation.Data.DbContexts;
 
@@ -11,9 +12,10 @@ using ZaminEducation.Data.DbContexts;
 namespace ZaminEducation.Data.Migrations
 {
     [DbContext(typeof(ZaminEducationDbContext))]
-    partial class ZaminEducationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221004091659_ZaminCreativeMigration2")]
+    partial class ZaminCreativeMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1348,7 +1350,7 @@ namespace ZaminEducation.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ZaminEducation.Domain.Entities.Users.ApplicantUser", "User")
+                    b.HasOne("ZaminEducation.Domain.Entities.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
