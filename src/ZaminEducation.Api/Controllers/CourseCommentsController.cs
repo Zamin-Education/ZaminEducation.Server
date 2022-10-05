@@ -6,10 +6,10 @@ using ZaminEducation.Service.Interfaces;
 namespace ZaminEducation.Api.Controllers;
 
 [Authorize(Policy = "AllPolicy")]
-public class CourseCommentController : BaseController
+public class CourseCommentsController : BaseController
 {
     private readonly ICourseCommentService courseCommentService;
-    public CourseCommentController(ICourseCommentService courseCommentService)
+    public CourseCommentsController(ICourseCommentService courseCommentService)
     {
         this.courseCommentService = courseCommentService;
     }
@@ -22,8 +22,8 @@ public class CourseCommentController : BaseController
     /// <param name="parentId"></param>
     /// <returns></returns>
     [HttpPost]
-    public async ValueTask<IActionResult> CreateAsync(long courseId, string message, long? parentId) =>
-        Ok(await this.courseCommentService.AddAsync(courseId, message, parentId));
+    public async ValueTask<IActionResult> CreateAsync(long courseId, string message, long? parentId)
+        => Ok(await this.courseCommentService.AddAsync(courseId, message, parentId));
 
     /// <summary>
     /// Select all comments of course by id
@@ -32,9 +32,8 @@ public class CourseCommentController : BaseController
     /// <param name="courseId"></param>
     /// <returns></returns>
     [HttpGet]
-    public async ValueTask<IActionResult> GetAllAsync(
-        [FromQuery] PaginationParams @params, long courseId) =>
-            Ok(await this.courseCommentService.GetAllAsync(@params, courseId));
+    public async ValueTask<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, long courseId) 
+        => Ok(await this.courseCommentService.GetAllAsync(@params, courseId));
 
     /// <summary>
     /// Select comment of course by id
@@ -42,8 +41,8 @@ public class CourseCommentController : BaseController
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public async ValueTask<IActionResult> GetAsync(long id) =>
-        Ok(await this.courseCommentService.GetAsync(id));
+    public async ValueTask<IActionResult> GetAsync(long id)
+        => Ok(await this.courseCommentService.GetAsync(id));
 
     /// <summary>
     /// Update comment
@@ -52,26 +51,26 @@ public class CourseCommentController : BaseController
     /// <param name="message"></param>
     /// <returns></returns>
     [HttpPut("{id}")]
-    public async ValueTask<IActionResult> UpdateAsync(long id, string message) =>
-        Ok(await this.courseCommentService.UpdateAsync(id, message));
+    public async ValueTask<IActionResult> UpdateAsync(long id, string message)
+        => Ok(await this.courseCommentService.UpdateAsync(id, message));
 
     /// <summary>
     /// Delete comment of course by id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpDelete("id")]
-    public async ValueTask<IActionResult> DeleteAsync(long id) =>
-        Ok(await this.courseCommentService.DeleteAsync(id));
+    [HttpDelete("{id}")]
+    public async ValueTask<IActionResult> DeleteAsync(long id)
+        => Ok(await this.courseCommentService.DeleteAsync(id));
 
     /// <summary>
     /// Select replied comment of course by id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("repliedcomment{id}")]
-    public async ValueTask<IActionResult> GetRepliedComments(long id) =>
-        Ok(await this.courseCommentService.GetRepliedComments(id));
+    [HttpGet("replies{id}")]
+    public async ValueTask<IActionResult> GetReplies(long id)
+        => Ok(await this.courseCommentService.GetReplies(id));
 
     /// <summary>
     /// Search comments
@@ -80,7 +79,6 @@ public class CourseCommentController : BaseController
     /// <param name="search"></param>
     /// <returns></returns>
     [HttpGet("search")]
-    public async ValueTask<IActionResult> SearchAsync(
-        PaginationParams @params, string search) =>
-            Ok(await this.courseCommentService.SearchAsync(@params, search));
+    public async ValueTask<IActionResult> SearchAsync([FromQuery] PaginationParams @params, string search)
+        => Ok(await this.courseCommentService.SearchAsync(@params, search));
 }
