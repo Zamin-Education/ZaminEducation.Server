@@ -7,10 +7,10 @@ using ZaminEducation.Service.Interfaces.Courses;
 namespace ZaminEducation.Api.Controllers;
 
 [Authorize(Policy = "AdminPolicy")]
-public class CourseController : BaseController
+public class CoursesController : BaseController
 {
     private readonly ICourseService courseService;
-    public CourseController(ICourseService courseService)
+    public CoursesController(ICourseService courseService)
     {
         this.courseService = courseService;
     }
@@ -29,7 +29,6 @@ public class CourseController : BaseController
     /// </summary>
     /// <param name="params"></param>
     /// <returns></returns>
-
     [HttpGet, AllowAnonymous]
     public async ValueTask<IActionResult> GetAllAsync([FromQuery] PaginationParams @params) 
         => Ok(await this.courseService.GetAllAsync(@params));
@@ -40,7 +39,7 @@ public class CourseController : BaseController
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}"), AllowAnonymous]
-    public async ValueTask<IActionResult> GetByIdAsync(long id) 
+    public async ValueTask<IActionResult> GetAsync(long id) 
         => Ok(await this.courseService.GetAsync(course => course.Id.Equals(id)));
 
     /// <summary>
@@ -62,14 +61,13 @@ public class CourseController : BaseController
     public async ValueTask<IActionResult> DeleteAsync(long id) 
         => Ok(await this.courseService.DeleteAsync(course => course.Id.Equals(id)));
 
-
     /// <summary>
     /// Search course
     /// </summary>
     /// <param name="params"></param>
     /// <param name="search"></param>
     /// <returns></returns>
-    [HttpGet("search")]
+    [HttpGet("search"), AllowAnonymous]
     public async ValueTask<IActionResult> SearchAsync([FromQuery] PaginationParams @params, string search) 
         => Ok(await this.courseService.SearchAsync(@params, search));
 
@@ -78,7 +76,7 @@ public class CourseController : BaseController
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("videos{id}")]
+    [HttpGet("videos{id}"), AllowAnonymous]
     public async ValueTask<IActionResult> GetCourseVideosAsync(long id) 
         => Ok(await this.courseService.GetCourseVideosAsync(video => video.Id.Equals(id)));
 
@@ -87,7 +85,7 @@ public class CourseController : BaseController
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("targets{id}")]
+    [HttpGet("targets{id}"), AllowAnonymous]
     public async ValueTask<IActionResult> GetCourseTargetsAsync(long id) 
         => Ok(await this.courseService.GetCourseTargetsAsync(target => target.Id.Equals(id)));
 
@@ -96,7 +94,7 @@ public class CourseController : BaseController
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("models{id}")]
+    [HttpGet("models{id}"), AllowAnonymous]
     public async ValueTask<IActionResult> GetCourseModulesAsync(long id) 
         => Ok(await this.courseService.GetCourseModulesAsync(model => model.Id.Equals(id)));
 }

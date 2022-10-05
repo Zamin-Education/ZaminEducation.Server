@@ -91,7 +91,7 @@ namespace ZaminEducation.Service.Services
             return comment;
         }
 
-        public async ValueTask<IEnumerable<CourseComment>> GetRepliedComments(long id)
+        public async ValueTask<IEnumerable<CourseComment>> GetReplies(long id)
         {
             var comment = await courseCommentRepository.GetAsync(cc => cc.Id == id);
 
