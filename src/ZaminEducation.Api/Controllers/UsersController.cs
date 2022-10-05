@@ -1,15 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
-using System.Net.Mime;
 using ZaminEducation.Api.Extensions;
-using ZaminEducation.Data.DbContexts;
 using ZaminEducation.Domain.Configurations;
 using ZaminEducation.Domain.Entities.Users;
 using ZaminEducation.Service.DTOs.Users;
 using ZaminEducation.Service.Interfaces;
-using ZaminEducation.Service.Services;
 
 namespace ZaminEducation.Api.Controllers;
 
@@ -38,7 +33,7 @@ public class UsersController : BaseController
     /// <param name="id"></param>
     /// <returns>true if user deleted succesfully else false</returns>
     [HttpDelete("{id}"), Authorize(Roles = "Admin")]
-    public async ValueTask<ActionResult<bool>> DeleteAsync([FromRoute]long id) =>
+    public async ValueTask<ActionResult<bool>> DeleteAsync([FromRoute] long id) =>
         Ok(await userService.DeleteAsync(user => user.Id == id));
 
 
@@ -59,8 +54,8 @@ public class UsersController : BaseController
     /// <returns>user</returns>
     /// <response code="400">if user data is not in the base</response>
     /// <response code="200">if user data have in database</response>
-    [HttpGet("{id}"), Authorize(Roles  = "AllPolicy")]
-    public async ValueTask<ActionResult<User>> GetAsync([FromRoute]long id) =>
+    [HttpGet("{id}"), Authorize(Roles = "AllPolicy")]
+    public async ValueTask<ActionResult<User>> GetAsync([FromRoute] long id) =>
         Ok(await userService.GetAsync(user => user.Id == id));
 
     /// <summary>
@@ -71,7 +66,7 @@ public class UsersController : BaseController
     /// <returns></returns>
     [HttpPut, Authorize("AllPolicy")]
     public async ValueTask<ActionResult<User>> UpdateAsync(
-        long id, [FromBody] UserForCreationDto dto) => 
+        long id, [FromBody] UserForCreationDto dto) =>
             Ok(await userService.UpdateAsync(id, dto));
 
     /// <summary>

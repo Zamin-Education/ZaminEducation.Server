@@ -1,5 +1,4 @@
-﻿using System.IO;
-using ZaminEducation.Service.DTOs.Commons;
+﻿using ZaminEducation.Service.DTOs.Commons;
 
 namespace ZaminEducation.Api.Extensions
 {

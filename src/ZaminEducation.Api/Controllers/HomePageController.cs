@@ -60,7 +60,7 @@ namespace ZaminEducation.Api.Controllers
         /// <returns></returns>
         [HttpPut("attachment/{id}")]
         public async ValueTask<ActionResult<bool>> UpdateGalleryImagesAsync(
-            [FromRoute]long id, [FromForm] IFormFile file)
+            [FromRoute] long id, [FromForm] IFormFile file)
         {
             return Ok(await _homePageService.UpdatePhotoGalleryAsync(id, file));
         }
@@ -73,7 +73,7 @@ namespace ZaminEducation.Api.Controllers
         /// <returns></returns>
         [HttpPut("about-us/{id}")]
         public async ValueTask<ActionResult<bool>> UpdateProjectAboutInfoAsync(
-            [FromRoute]long id,
+            [FromRoute] long id,
             [FromForm] InfoAboutProjectForCreationDto dto)
         {
             return Ok(await _homePageService.UpdateProjectAboutInfoAsync(id, dto));
@@ -87,7 +87,7 @@ namespace ZaminEducation.Api.Controllers
         /// <returns></returns>
         [HttpPut("opportunity-reason/{id}")]
         public async ValueTask<ActionResult<bool>> UpdateOpportunityReasonAsync(
-            [FromRoute]long id, ReasonForCreationDto dto)
+            [FromRoute] long id, ReasonForCreationDto dto)
         {
             return Ok(await _homePageService.UpdateReasonAsync(id, dto));
         }
@@ -100,7 +100,7 @@ namespace ZaminEducation.Api.Controllers
         /// <returns></returns>
         [HttpPut("social-network/{id}")]
         public async ValueTask<ActionResult<bool>> UpdateSocialNetworksAsync(
-            [FromRoute]long id, SocialNetworksForCreationDto dto)
+            [FromRoute] long id, SocialNetworksForCreationDto dto)
         {
             return Ok(await _homePageService.UpdateSocialNetwordAsync(id, dto));
         }

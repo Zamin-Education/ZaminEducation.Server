@@ -1,4 +1,3 @@
-using ZaminEducation.Domain.Commons;
 using ZaminEducation.Domain.Entities.MainPages.Commons;
 
 namespace ZaminEducation.Domain.Entities.MainPages;

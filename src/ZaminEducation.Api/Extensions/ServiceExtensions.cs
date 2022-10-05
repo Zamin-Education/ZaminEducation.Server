@@ -42,6 +42,7 @@ namespace ZaminEducation.Api
             services.AddScoped<IRepository<SocialNetworks>, Repository<SocialNetworks>>();
             services.AddScoped<IRepository<PhotoGalleryAttachment>, Repository<PhotoGalleryAttachment>>();
             services.AddScoped<IRepository<ReferralLink>, Repository<ReferralLink>>();
+            services.AddScoped<IRepository<CourseCategory>, Repository<CourseCategory>>();
 
             // services
             services.AddScoped<IAttachmentService, AttachmentService>();
@@ -54,6 +55,7 @@ namespace ZaminEducation.Api
             services.AddScoped<ICertificateService, CertificateService>();
             services.AddScoped<ISavedCoursesService, SavedCoursesService>();
             services.AddScoped<IHomePageService, HomePageService>();
+            services.AddScoped<ICourseCategoryService, CourseCategoryService>();
         }
 
         public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
@@ -87,7 +89,7 @@ namespace ZaminEducation.Api
         {
             services.AddSwaggerGen(p =>
             {
-                var xmlFile = $"{ Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 p.IncludeXmlComments(xmlPath);
 

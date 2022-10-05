@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using ZaminEducation.Domain.Entities.MainPages.Commons;
 
 namespace ZaminEducation.Service.DTOs.HomePage;
 

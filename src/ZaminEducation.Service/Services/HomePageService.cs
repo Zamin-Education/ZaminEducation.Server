@@ -1,6 +1,5 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using ZaminEducation.Data.IRepositories;
 using ZaminEducation.Domain.Entities.Commons;
@@ -27,7 +26,7 @@ public class HomePageService : IHomePageService
     private readonly IRepository<PhotoGalleryAttachment> photoGalleryAttachmentRepository;
     private readonly IMapper mapper;
 
-    public HomePageService( IMapper mapper,
+    public HomePageService(IMapper mapper,
         IRepository<HomePage> homePageRepository,
         IRepository<HomePageHeader> homePageHeaderRepository,
         IAttachmentService attachmentService,
@@ -52,7 +51,7 @@ public class HomePageService : IHomePageService
 
     public async ValueTask<HomePage> GetHomePageAsync()
     {
-        string[] includes = {"PhotoGallery"};
+        string[] includes = { "PhotoGallery" };
 
         var homePage = homePageRepository.GetAll()
             .Include(hp => hp.HomePageHeader)
@@ -65,10 +64,10 @@ public class HomePageService : IHomePageService
             .ThenInclude(pg => pg.Photos)
             .FirstOrDefault();
 
-            homePage.PopularCourses = await GetPopularCoursesAsync();
+        homePage.PopularCourses = await GetPopularCoursesAsync();
 
         return homePage;
-    }             
+    }
 
     public async ValueTask<bool> UpdateHeaderAsync(long id, HomePageHeaderForCreationDto dto)
     {
@@ -102,7 +101,7 @@ public class HomePageService : IHomePageService
             throw new ZaminEducationException(404, "This offered opportunity is not found.");
 
         Attachment attachment;
-        if(dto.FormFile is not null)
+        if (dto.FormFile is not null)
         {
             var attachmentDto = dto.FormFile.ToAttachmentOrDefault();
             attachment = await attachmentService.UploadAsync(attachmentDto);
@@ -119,7 +118,7 @@ public class HomePageService : IHomePageService
 
     public async ValueTask<bool> UpdatePhotoGalleryAsync(long id, IFormFile dto)
     {
-        var existAttachment = 
+        var existAttachment =
             await photoGalleryAttachmentRepository.GetAsync(h => h.Id == id);
         if (existAttachment is null)
             throw new ZaminEducationException(404, "Picture not found.");
@@ -133,10 +132,10 @@ public class HomePageService : IHomePageService
         return existAttachment is not null;
     }
 
-    public async ValueTask<bool> UpdateProjectAboutInfoAsync(long id, 
+    public async ValueTask<bool> UpdateProjectAboutInfoAsync(long id,
         InfoAboutProjectForCreationDto dto)
     {
-        var existInfo = 
+        var existInfo =
             await infoAboutProjectRepository.GetAsync(h => h.Id == id);
         if (existInfo is null)
             throw new ZaminEducationException(404, "Information not found.");
@@ -175,7 +174,7 @@ public class HomePageService : IHomePageService
 
     public async ValueTask<bool> UpdateSocialNetwordAsync(long id, SocialNetworksForCreationDto dto)
     {
-        var existSocialNetwork = 
+        var existSocialNetwork =
             await socialNetworksRepository.GetAsync(sn => sn.Id == id);
         if (existSocialNetwork is null)
             throw new ZaminEducationException(404, "networks not found.");

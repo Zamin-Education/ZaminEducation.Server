@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Http;
 using ZaminEducation.Domain.Entities.MainPages;
-using ZaminEducation.Service.DTOs.Commons;
 using ZaminEducation.Service.DTOs.HomePage;
 
 namespace ZaminEducation.Service.Interfaces;
@@ -18,7 +17,7 @@ public interface IHomePageService
 
     ValueTask<bool> UpdateOpportinutyAsync(
        long id,
-       OfferedOpportunitesForCreationDto dto    );
+       OfferedOpportunitesForCreationDto dto);
 
     ValueTask<bool> UpdateReasonAsync(long id, ReasonForCreationDto dto);
 
