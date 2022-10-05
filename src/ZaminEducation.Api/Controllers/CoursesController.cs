@@ -29,7 +29,6 @@ public class CoursesController : BaseController
     /// </summary>
     /// <param name="params"></param>
     /// <returns></returns>
-
     [HttpGet, AllowAnonymous]
     public async ValueTask<IActionResult> GetAllAsync([FromQuery] PaginationParams @params) 
         => Ok(await this.courseService.GetAllAsync(@params));
@@ -40,7 +39,7 @@ public class CoursesController : BaseController
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}"), AllowAnonymous]
-    public async ValueTask<IActionResult> GetByIdAsync(long id) 
+    public async ValueTask<IActionResult> GetAsync(long id) 
         => Ok(await this.courseService.GetAsync(course => course.Id.Equals(id)));
 
     /// <summary>
@@ -61,7 +60,6 @@ public class CoursesController : BaseController
     [HttpDelete("{id}")]
     public async ValueTask<IActionResult> DeleteAsync(long id) 
         => Ok(await this.courseService.DeleteAsync(course => course.Id.Equals(id)));
-
 
     /// <summary>
     /// Search course

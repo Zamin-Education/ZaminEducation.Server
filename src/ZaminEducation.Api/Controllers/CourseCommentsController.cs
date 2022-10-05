@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ZaminEducation.Domain.Configurations;
 using ZaminEducation.Service.Interfaces;
@@ -32,7 +32,7 @@ public class CourseCommentsController : BaseController
     /// <param name="courseId"></param>
     /// <returns></returns>
     [HttpGet]
-    public async ValueTask<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, long courseId) 
+    public async ValueTask<IActionResult> GetAllAsync([FromQuery] PaginationParams @params, long courseId)
         => Ok(await this.courseCommentService.GetAllAsync(@params, courseId));
 
     /// <summary>
@@ -41,7 +41,7 @@ public class CourseCommentsController : BaseController
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    public async ValueTask<IActionResult> GetAsync(long id)
+    public async ValueTask<IActionResult> GetAsync(long id) 
         => Ok(await this.courseCommentService.GetAsync(id));
 
     /// <summary>
@@ -64,12 +64,12 @@ public class CourseCommentsController : BaseController
         => Ok(await this.courseCommentService.DeleteAsync(id));
 
     /// <summary>
-    /// Select replied comment of course by id
+    /// Select replied comments of course by id
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("replies{id}")]
-    public async ValueTask<IActionResult> GetReplies(long id)
+    public async ValueTask<IActionResult> GetReplies(long id) 
         => Ok(await this.courseCommentService.GetReplies(id));
 
     /// <summary>
