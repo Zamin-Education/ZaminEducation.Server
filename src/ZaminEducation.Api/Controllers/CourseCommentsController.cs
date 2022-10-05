@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ZaminEducation.Domain.Configurations;
 using ZaminEducation.Service.Interfaces;
@@ -79,6 +79,6 @@ public class CourseCommentsController : BaseController
     /// <param name="search"></param>
     /// <returns></returns>
     [HttpGet("search")]
-    public async ValueTask<IActionResult> SearchAsync(PaginationParams @params, string search)
+    public async ValueTask<IActionResult> SearchAsync([FromQuery] PaginationParams @params, string search)
         => Ok(await this.courseCommentService.SearchAsync(@params, search));
 }

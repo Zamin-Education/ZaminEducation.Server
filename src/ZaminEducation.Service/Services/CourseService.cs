@@ -20,17 +20,20 @@ namespace ZaminEducation.Service.Services.Courses
         private readonly IRepository<Course> courseRepository;
         private readonly IYouTubeService youTubeService;
         private readonly IRepository<CourseRate> courseRateRepository;
+        private readonly IAttachmentService attachmentService;
         private readonly IMapper mapper;
 
         public CourseService(
             IRepository<Course> courseRepository,
             IYouTubeService youTubeService,
             IRepository<CourseRate> courseRateRepository,
+            IAttachmentService attachmentService,
             IMapper mapper)
         {
             this.courseRepository = courseRepository;
             this.youTubeService = youTubeService;
             this.courseRateRepository = courseRateRepository;
+            this.attachmentService = attachmentService;
             this.mapper = mapper;
         }
 
@@ -42,8 +45,13 @@ namespace ZaminEducation.Service.Services.Courses
             if (course is not null)
                 throw new ZaminEducationException(400, "Course already exists");
 
+            var attachmentDto = courseForCreationDto.Image.ToAttachmentOrDefault();
+            var attachment = await this.attachmentService.UploadAsync(dto: attachmentDto);
+
             Course mappedCourse = mapper.Map<Course>(source: courseForCreationDto);
 
+            mappedCourse.ImageId = attachment.Id;
+            mappedCourse.Create();
             Course entity = await courseRepository.AddAsync(entity: mappedCourse);
 
             await courseRepository.SaveChangesAsync();
@@ -111,8 +119,12 @@ namespace ZaminEducation.Service.Services.Courses
             if (course is null)
                 throw new ZaminEducationException(404, "Course not found");
 
+            var attachmentDto = courseForCreationDto.Image.ToAttachmentOrDefault();
+            var attachment = await this.attachmentService.UploadAsync(dto: attachmentDto);
+
             course = mapper.Map(courseForCreationDto, course);
 
+            course.ImageId = attachment.Id;
             course.Update();
 
             course = courseRepository.Update(entity: course);

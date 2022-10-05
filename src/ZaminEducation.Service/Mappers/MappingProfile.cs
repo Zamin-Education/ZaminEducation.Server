@@ -29,7 +29,7 @@ namespace ZaminEducation.Service.Mappers
             CreateMap<CourseVideo, CourseVideoForCreationDto>().ReverseMap();
             CreateMap<CourseTarget, CourseTargetForCreationDto>().ReverseMap();
             CreateMap<CourseModule, CourseModuleForCreationDto>().ReverseMap();
-            CreateMap<Course, CourseForCreationDto>().ReverseMap();
+            CreateMap<CourseForCreationDto, Course>().ForMember(p => p.Image, config => config.Ignore()).ReverseMap();
             CreateMap<CourseCategory, CourseCategoryForCreationDto>().ReverseMap();
             CreateMap<SavedCourse, SavedCourseForCreationDto>().ReverseMap();
             CreateMap<CourseRate, CourseRateForCreationDto>().ReverseMap();
