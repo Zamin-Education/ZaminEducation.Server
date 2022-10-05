@@ -17,7 +17,7 @@ namespace ZaminEducation.Api.Controllers
             this.repository = repository;
         }
 
-        [HttpPost, Route("Login")]
+        [HttpPost, Route("login")]
         public async Task<IActionResult> Login(UserForLoginDTO dto)
         {
             var token = await authService.GenerateToken(dto.Login, dto.Password);

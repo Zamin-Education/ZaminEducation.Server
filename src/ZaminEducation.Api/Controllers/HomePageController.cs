@@ -30,7 +30,7 @@ namespace ZaminEducation.Api.Controllers
         /// <param name="id"></param>
         /// <param name="dto"></param>
         /// <returns></returns>
-        [HttpPut("deader/{id}")]
+        [HttpPut("header/{id}")]
         public async ValueTask<ActionResult<bool>> UpdateHomePageHeaderAsync(
             [FromRoute] long id,
             [FromForm] HomePageHeaderForCreationDto dto)

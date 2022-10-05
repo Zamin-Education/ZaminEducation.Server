@@ -69,7 +69,7 @@ public class CourseCommentController : BaseController
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("repliedcomment{id}")]
+    [HttpGet("repliedcomment/{id}")]
     public async ValueTask<IActionResult> GetRepliedComments(long id) =>
         Ok(await this.courseCommentService.GetRepliedComments(id));
 }
