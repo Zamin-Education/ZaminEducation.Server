@@ -3,6 +3,7 @@ using ZaminEducation.Domain.Entities.Commons;
 using ZaminEducation.Domain.Entities.Courses;
 using ZaminEducation.Domain.Entities.MainPages;
 using ZaminEducation.Domain.Entities.Quizzes;
+using ZaminEducation.Domain.Entities.user;
 using ZaminEducation.Domain.Entities.UserCourses;
 using ZaminEducation.Domain.Entities.Users;
 
@@ -36,12 +37,15 @@ namespace ZaminEducation.Data.DbContexts
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserSocialNetwork> UserSocialNetworks { get; set; }
         public virtual DbSet<ReferralLink> ReferralLinks { get; set; }
+        public virtual DbSet<ZCApplicant> ZCApplicants { get; set; }
+        public virtual DbSet<ZCApplicantAsset> ZCApplicantsAssets { get; set; }
+        public virtual DbSet<ZCApplicantDirection> ZCApplicantDirections { get; set; }
 
         public virtual DbSet<HomePage> HomePages { get; set; }
         public virtual DbSet<HomePageHeader> HomePageHeaders { get; set; }
         public virtual DbSet<InfoAboutProject> InfoAboutProjects { get; set; }
         public virtual DbSet<OfferedOpportunities> OfferedOpportunities { get; set; }
-        public virtual DbSet<PhotoGallery> PhotoGalleries { get; set; }
+        public virtual DbSet<PhotoGallery> PhotoGalleries { get; set; } 
         public virtual DbSet<Reason> Reasons { get; set; }
         public virtual DbSet<SocialNetworks> SocialNetworks { get; set; }
         public virtual DbSet<PhotoGalleryAttachment> PhotoGalleryAttachments { get; set; }

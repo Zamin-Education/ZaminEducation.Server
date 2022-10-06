@@ -1,4 +1,6 @@
-﻿using ZaminEducation.Service.DTOs.Commons;
+﻿using Newtonsoft.Json;
+using ZaminEducation.Domain.Entities.HomePage;
+using ZaminEducation.Service.DTOs.Commons;
 
 namespace ZaminEducation.Service.Helpers;
 
@@ -41,4 +43,46 @@ public class FileHelper
         File.Delete(fullPath);
         return true;
     }
+
+
+    /// <summary>
+    /// Set of change home page info to ZaminEducation.Api.wwwroot.HomePagesInfo.json
+    /// </summary>
+    /// <param name="entity"></param>
+    public async static Task<ZCApplicationInfo> SaveHomePagesInfoAsync(ZCApplicationInfo entity)
+    {
+        var oldHomePagesInfo = GetHomePagesInfo();
+
+        if (oldHomePagesInfo is not null)
+        {
+            entity.Title = string.IsNullOrEmpty(entity.Title) ? oldHomePagesInfo.Title : entity.Title;
+            entity.Description1 = string.IsNullOrEmpty(entity.Description1) ? oldHomePagesInfo.Description1 : entity.Description1;
+            entity.Description2 = string.IsNullOrEmpty(entity.Description2) ? oldHomePagesInfo.Description2 : entity.Description2;
+        }
+
+        string json = JsonConvert.SerializeObject(entity, Formatting.Indented);
+        await File.WriteAllTextAsync(EnvironmentHelper.HomePagesInfoConnectinString, json);
+
+        return entity;
+    }
+
+    /// <summary>
+    /// Remove home pages info from ZaminEducation.Api.wwwroot.HomePagesInfo.json
+    /// </summary>
+    public static bool RemoveHomePageInfo()
+    {
+        var exist = GetHomePagesInfo();
+        File.WriteAllText(EnvironmentHelper.HomePagesInfoConnectinString, "");
+
+        return exist is not null;
+    }
+
+    /// <summary>
+    /// Gets home pages info from ZaminEducation.Api.wwwroot.HomePagesInfo.json
+    /// </summary>
+    /// <returns></returns>
+    public static ZCApplicationInfo GetHomePagesInfo()
+        => JsonConvert.DeserializeObject<ZCApplicationInfo>(
+            File.ReadAllText(EnvironmentHelper.HomePagesInfoConnectinString));
+
 }

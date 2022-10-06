@@ -9,6 +9,7 @@ using ZaminEducation.Domain.Entities.Commons;
 using ZaminEducation.Domain.Entities.Courses;
 using ZaminEducation.Domain.Entities.MainPages;
 using ZaminEducation.Domain.Entities.Quizzes;
+using ZaminEducation.Domain.Entities.user;
 using ZaminEducation.Domain.Entities.UserCourses;
 using ZaminEducation.Domain.Entities.Users;
 using ZaminEducation.Service.Interfaces;
@@ -43,6 +44,9 @@ namespace ZaminEducation.Api
             services.AddScoped<IRepository<PhotoGalleryAttachment>, Repository<PhotoGalleryAttachment>>();
             services.AddScoped<IRepository<ReferralLink>, Repository<ReferralLink>>();
             services.AddScoped<IRepository<CourseCategory>, Repository<CourseCategory>>();
+            services.AddScoped<IRepository<ZCApplicant>, Repository<ZCApplicant>>();
+            services.AddScoped<IRepository<ZCApplicantAsset>, Repository<ZCApplicantAsset>>();
+            services.AddScoped<IRepository<ZCApplicantDirection>, Repository<ZCApplicantDirection>>();
             // services
             services.AddScoped<IAttachmentService, AttachmentService>();
             services.AddScoped<ICourseService, CourseService>();
@@ -55,6 +59,9 @@ namespace ZaminEducation.Api
             services.AddScoped<ISavedCoursesService, SavedCoursesService>();
             services.AddScoped<IHomePageService, HomePageService>();
             services.AddScoped<ICourseCategoryService, CourseCategoryService>();
+            services.AddScoped<IZCApplicantAssetService, ZCApplicantAssetService>();
+            services.AddScoped<IZCApplicantService, ZCApplicantService>();
+            services.AddScoped<IZCDirectionService, ZCDirectionService>();
         }
 
         public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
